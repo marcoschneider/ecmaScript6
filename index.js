@@ -1,14 +1,19 @@
 'use strict';
 
+let cookies;
+
 const express = require('express');
 const fileUpload = require('express-fileupload');
 const dir = require('node-dir');
+const cookieParser = require('cookie-parser');
 const download = require('download-file');
 const app = express();
+const http = require('http').Server(app);
 const bodyParser = require('body-parser');
 
 app.use(fileUpload());
 app.use('/purecss', express.static(__dirname + '/node_modules/purecss/build'));
+app.use(cookieParser());
 app.use('/js', express.static(__dirname + '/assets/js'));
 app.use('/files', express.static(__dirname + '/assets/files/upload'));
 app.use('/css', express.static(__dirname + '/assets/css'));
@@ -17,13 +22,74 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 }));
 
+
+
 app.get('/', function (req, res) {
+  cookies = req.cookies;
+  res.sendFile(`${__dirname}/markup/nickname.html`);
+  console.log(cookies);
+});
+
+
+
+
+app.post('/', function (req, res) {
+
+  let nickname = req.body.nickname;
+
+  if(nickname !== ""){
+    res.cookie('Nickname', nickname);
+    res.redirect('/decision');
+  } else {
+    res.redirect('/');
+  }
+
+});
+
+
+
+//Checks if cookie is already set and redirects to decision page
+app.get('/decision', function (req, res) {
+
+  cookies = req.cookies;
+
+  if(typeof cookies.Nickname === "undefined"
+      || cookies.Nickname === ''){
+    res.redirect('/');
+    return;
+  }
   res.sendFile(`${__dirname}/markup/decision-frontpage.html`);
 });
 
+
+
+//
 app.get('/upload', function (req, res) {
   res.sendFile(`${__dirname}/markup/upload.html`);
 });
+
+
+
+
+app.post('/upload', function(req, res) {
+
+  // Uploaded files:
+ /* if(req.files.sampleFile === undefined){
+    return console.log('No files where uploaded');
+  }
+
+  let file = req.files.sampleFile;
+
+  file.mv(`assets/files/upload/${file.name}`,(err) => {
+    if (err) {
+      res.send(err);
+    }
+    console.log("Uploaded File");
+  });*/
+});
+
+
+
 
 app.get('/display', function (req, res) {
   res.sendFile(`${__dirname}/markup/download.html`);
@@ -36,6 +102,9 @@ app.get('/display', function (req, res) {
     //res.send(files);
   });
 });
+
+
+
 
 app.post('/display', function (req, res) {
   let filename = req.body.filename;
@@ -54,24 +123,9 @@ app.post('/display', function (req, res) {
   
 });
 
-app.post('/upload', function(req, res) {
-  // Uploaded files:
-  if(req.files.sampleFile === undefined){
-    return res.status(400).send('No files where uploaded');
-  }
 
-  let file = req.files.sampleFile;
-  console.log(file);
 
-  file.mv(`assets/files/upload/${file.name}`,(err) => {
-    if (err) {
-      console.log(err);
-    }
-    return res.send('Files upload');
-  });
-
-});
-
-var server = app.listen(3000, function () {
+//Runs server
+http.listen(3000, function () {
   console.log('Example app listening on port 3000!');
 });

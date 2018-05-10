@@ -1,0 +1,39 @@
+.pure-form{
+  legend{
+    color: white;
+  }
+
+  .file-field{
+    position: relative;
+
+    .pure-button, .pure-button-primary{
+      float: left;
+      height: 3rem;
+      line-height: 3rem;
+    }
+
+    input[type="file"] {
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      font-size: 20px;
+      cursor: pointer;
+      opacity: 0;
+    }
+
+    .file-path-wrapper{
+      overflow: hidden;
+      padding-left: 10px;
+    }
+  }
+
+  .custom-file-upload:hover{
+    background-color: rgba(0,0,0,0.4);
+    color: white;
+  }
+}

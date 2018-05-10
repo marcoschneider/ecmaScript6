@@ -3,17 +3,22 @@
   <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="/purecss/pure-min.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/custom.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/es6.styles.css"/>
     <title>Download</title>
   </head>
   <body>
-  <div class="pure-g">
+  <div class="container">
     <div class="pure-u-1-2">
       <h2>Upload a file from your PC</h2>
       <form method="post" action="" >
         <input id="sampleFile" type="text" name="filename" />
-        <input type='submit' value='Display!' />
+        <input type='submit' class="pure-button" value='Display!' />
       </form>
+    </div>
+    <div class="pure-g">
+      <div class="pure-u-1-6">
+        <a class="pure-button pure-button-primary" href="/decision">Go back</a>
+      </div>
     </div>
   </div>
   <script>
