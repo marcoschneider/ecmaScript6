@@ -4,13 +4,13 @@ class Ajax{
 
   constructor(url, id){
     this.url = url;
-    this.inputField = document.getElementById('sampleFile');
+    this.inputField = document.getElementById('upload');
     this.submit = document.getElementById(id);
     this.addListener();
   }
 
   validateData(){
-    console.log(this.inputField);
+    console.log(this.inputField.value);
   }
 
   sendData(inputData){
@@ -32,6 +32,3 @@ class Ajax{
   }
 
 }
-
-let ajax = new Ajax('/upload', 'submit');
-ajax.validateData();

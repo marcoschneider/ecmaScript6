@@ -73,6 +73,9 @@ app.get('/upload', function (req, res) {
 
 app.post('/upload', function(req, res) {
 
+  res.redirect('/upload');
+
+
   // Uploaded files:
  /* if(req.files.sampleFile === undefined){
     return console.log('No files where uploaded');

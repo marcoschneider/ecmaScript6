@@ -18,10 +18,10 @@
           <div class="file-field">
             <div class="pure-button-primary">
               <span>Datei</span>
-              <input id="sampleFile" type="file" name="sampleFile" />
+              <input type="file" id="upload"/>
             </div>
             <div class="file-path-wrapper">
-              <input type="text"/>
+              <input class="file-path" type="text"/>
             </div>
           </div>
           <div class="space"></div>
@@ -40,8 +40,24 @@
     <script type="text/javascript" src="/js/ajax.js"></script>
     <script>
 
+
+      let file = document.getElementById("upload").files[0];
+      if (file) {
+        let reader = new FileReader();
+        reader.readAsText(file, "UTF-8");
+        reader.onload = function (evt) {
+          console.log(evt.target.result);
+        };
+        reader.onerror = function () {
+          console.log("error reading file");
+        };
+      }
+
+      let ajax = new Ajax('/upload', 'submit');
+      //ajax.validateData();
+
       let key = new Key();
-      console.log(key.generate());
+      //console.log(key.generate());
     </script>
   </body>
 </html>
