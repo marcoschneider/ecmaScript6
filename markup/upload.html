@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/purecss/pure-min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/es6.styles.css"/>
+    <title>Upload</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="pure-u-1-2">
+        <h2>Upload a file from your PC</h2>
+        <form class="pure-form"
+              id='uploadForm'
+              method='post'
+              encType="multipart/form-data">
+
+          <div class="file-field">
+            <div class="pure-button-primary">
+              <span>Datei</span>
+              <input type="file" id="upload"/>
+            </div>
+            <div class="file-path-wrapper">
+              <input class="file-path" type="text"/>
+            </div>
+          </div>
+          <div class="space"></div>
+          <button id="submit" class="pure-button">Upload</button>
+
+        </form>
+      </div>
+      <div class="space"></div>
+      <div class="pure-g">
+        <div class="pure-u-1-6">
+          <a class="pure-button pure-button-primary" href="/decision">Go back</a>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="/js/generate.js"></script>
+    <script type="text/javascript" src="/js/ajax.js"></script>
+    <script>
+
+
+      let file = document.getElementById("upload").files[0];
+      if (file) {
+        let reader = new FileReader();
+        reader.readAsText(file, "UTF-8");
+        reader.onload = function (evt) {
+          console.log(evt.target.result);
+        };
+        reader.onerror = function () {
+          console.log("error reading file");
+        };
+      }
+
+      let ajax = new Ajax('/upload', 'submit');
+      //ajax.validateData();
+
+      let key = new Key();
+      //console.log(key.generate());
+    </script>
+  </body>
+</html>

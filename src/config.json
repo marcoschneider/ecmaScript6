@@ -1,0 +1,12 @@
+{
+  "name": "Ecmascript 6 Übung",
+  "description": "A Project based on juniors day source",
+  "bowerDir": "./bower_components",
+  "css": {
+    "file": "es6.styles.scss",
+    "src": [
+      "src/scss/**/*.scss"
+    ],
+    "dest": "assets/css"
+  }
+}

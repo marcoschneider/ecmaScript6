@@ -1,0 +1,46 @@
+.pure-form{
+  legend{
+    color: white;
+  }
+
+  input{
+    overflow: visible;
+
+  }
+
+
+  //File input field
+  .file-field{
+    position: relative;
+
+    .pure-button, .pure-button-primary{
+      float: left;
+      padding: 10px;
+      border-radius: 2px;
+    }
+
+    input[type="file"] {
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      font-size: 20px;
+      cursor: pointer;
+      color: black;
+      opacity: 0;
+    }
+
+    .file-path-wrapper{
+      overflow: hidden;
+      padding-left: 10px;
+
+      .file-path{
+        width: 100%;
+      }
+    }
+  }
+}
